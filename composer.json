@@ -1,7 +1,7 @@
 {
-  "name": "prhost/opencommerce-theme-default",
-  "description": "OpenCommerce Theme default",
-  "type": "opencommerce-theme",
+  "name": "prhost/theme-default-twig",
+  "description": "Newcart ecommerce Theme default (Twig)",
+  "type": "newcart-theme",
   "license": "GPL-3.0",
   "minimum-stability": "dev",
   "authors": [
