@@ -1,2 +1,2 @@
-# opencommerce-theme-default
-Theme default opencart
+# default-theme-twig
+Default theme Twig
