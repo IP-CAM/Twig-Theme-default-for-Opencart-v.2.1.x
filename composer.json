@@ -1,0 +1,13 @@
+{
+  "name": "prhost/opencommerce-theme-default",
+  "description": "OpenCommerce Theme default",
+  "type": "opencommerce-theme",
+  "license": "GPL-3.0",
+  "minimum-stability": "dev",
+  "authors": [
+    {
+      "name": "Kallef",
+      "email": "prhost@prhost.com.br"
+    }
+  ]
+}
