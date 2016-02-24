@@ -5,7 +5,7 @@
   <div id="collapse-shipping" class="panel-collapse collapse">
     <div class="panel-body">
       <p><?php echo $text_shipping; ?></p>
-      <form class="form-horizontal">
+      <div class="form-horizontal">
         <div class="form-group required">
           <label class="col-sm-2 control-label" for="input-country"><?php echo $entry_country; ?></label>
           <div class="col-sm-10">
@@ -34,12 +34,12 @@
             <input type="text" name="postcode" value="<?php echo $postcode; ?>" placeholder="<?php echo $entry_postcode; ?>" id="input-postcode" class="form-control" />
           </div>
         </div>
-        <input type="button" value="<?php echo $button_quote; ?>" id="button-quote" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary" />
-      </form>
+        <button type="button" id="button-quote" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-primary"><?php echo $button_quote; ?></button>
+      </div>
       <script type="text/javascript"><!--
 $('#button-quote').on('click', function() {
 	$.ajax({
-		url: 'index.php?route=checkout/shipping/quote',
+		url: 'index.php?route=total/shipping/quote',
 		type: 'post',
 		data: 'country_id=' + $('select[name=\'country_id\']').val() + '&zone_id=' + $('select[name=\'zone_id\']').val() + '&postcode=' + encodeURIComponent($('input[name=\'postcode\']').val()),
 		dataType: 'json',
@@ -133,7 +133,7 @@ $('#button-quote').on('click', function() {
 
 $(document).delegate('#button-shipping', 'click', function() {
 	$.ajax({
-		url: 'index.php?route=checkout/shipping/shipping',
+		url: 'index.php?route=total/shipping/shipping',
 		type: 'post',
 		data: 'shipping_method=' + encodeURIComponent($('input[name=\'shipping_method\']:checked').val()),
 		dataType: 'json',
@@ -162,7 +162,7 @@ $(document).delegate('#button-shipping', 'click', function() {
 <script type="text/javascript"><!--
 $('select[name=\'country_id\']').on('change', function() {
 	$.ajax({
-		url: 'index.php?route=checkout/shipping/country&country_id=' + this.value,
+		url: 'index.php?route=total/shipping/country&country_id=' + this.value,
 		dataType: 'json',
 		beforeSend: function() {
 			$('select[name=\'country_id\']').after(' <i class="fa fa-circle-o-notch fa-spin"></i>');
@@ -171,8 +171,6 @@ $('select[name=\'country_id\']').on('change', function() {
 			$('.fa-spin').remove();
 		},
 		success: function(json) {
-      $('.fa-spin').remove();
-
 			if (json['postcode_required'] == '1') {
 				$('input[name=\'postcode\']').parent().parent().addClass('required');
 			} else {
@@ -181,7 +179,7 @@ $('select[name=\'country_id\']').on('change', function() {
 
 			html = '<option value=""><?php echo $text_select; ?></option>';
 
-			if (json['zone']) {
+			if (json['zone'] && json['zone'] != '') {
 				for (i = 0; i < json['zone'].length; i++) {
 					html += '<option value="' + json['zone'][i]['zone_id'] + '"';
 
